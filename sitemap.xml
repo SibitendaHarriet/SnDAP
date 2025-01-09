@@ -1,7 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://example.com/twitter-data-collection/</loc>
+         <loc>https://sibitendaharriet.github.io/SnDAP/</loc>
+         <lastmod>2025-01-09</lastmod>
+    </url>
+    <url>
+         <loc>https://sibitendaharriet.github.io/SnDAP/1_Data_collection/twitter-data-collection/</loc>
+         <lastmod>2025-01-09</lastmod>
+    </url>
+    <url>
+         <loc>https://sibitendaharriet.github.io/SnDAP/1_Data_collection/youtube_data_collection/</loc>
+         <lastmod>2025-01-09</lastmod>
+    </url>
+    <url>
+         <loc>https://sibitendaharriet.github.io/SnDAP/2_Data_preparation/data_preparation/</loc>
+         <lastmod>2025-01-09</lastmod>
+    </url>
+    <url>
+         <loc>https://sibitendaharriet.github.io/SnDAP/3_Extraction_of_social_concerns/Sentiment_analysis/</loc>
+         <lastmod>2025-01-09</lastmod>
+    </url>
+    <url>
+         <loc>https://sibitendaharriet.github.io/SnDAP/3_Extraction_of_social_concerns/Themes_by_Document_similarity/</loc>
+         <lastmod>2025-01-09</lastmod>
+    </url>
+    <url>
+         <loc>https://sibitendaharriet.github.io/SnDAP/3_Extraction_of_social_concerns/Topic_modeling/</loc>
+         <lastmod>2025-01-09</lastmod>
+    </url>
+    <url>
+         <loc>https://sibitendaharriet.github.io/SnDAP/4_Analysis_of_concerns/Social_network_analysis/</loc>
+         <lastmod>2025-01-09</lastmod>
+    </url>
+    <url>
+         <loc>https://sibitendaharriet.github.io/SnDAP/4_Analysis_of_concerns/Temporal_analysis/</loc>
+         <lastmod>2025-01-09</lastmod>
+    </url>
+    <url>
+         <loc>https://sibitendaharriet.github.io/SnDAP/5_Visualisation_of_concerns/dashboard/</loc>
          <lastmod>2025-01-09</lastmod>
     </url>
 </urlset>
