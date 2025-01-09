@@ -1,0 +1,30 @@
+#site_name: Social Concerns Africa
+site_name: Social Concerns Africa
+site_url: https://example.com
+site_description: A guide to collecting Twitter data using snscrape.
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue
+      accent: pink
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: pink
+
+nav:
+  - Home: twitter-data-collection.md
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tasklist
+
+plugins:
+  - search
