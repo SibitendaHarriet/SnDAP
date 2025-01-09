@@ -14,22 +14,38 @@ theme:
       primary: blue
       accent: pink
 
-nav:
-  - Home: index.md
-  - Data Collection:
-      - Twitter Data Collection: Data_collection/twitter-data-collection.md
-      - YouTube Data Collection: Data_collection/youtube_data_collection.md
-  - Data Preparation: 
-      - Data Preparation: Data_preparation/data_preparation.md
-  - Extraction of Social Concerns: 
-      - Extraction of Topics: Extraction_of_social_concerns/Topic_modeling.md
-      - Themes by Document Similarity: Extraction_of_social_concerns/Themes_by_Document_similarity.md
-      - Extractions of Sentiments: Extraction_of_social_concerns/Sentiment_analysis.md
-  - Analysis of Social Concerns: 
-      - Temporal Analysis: Analysis_of_concerns/Temporal_analysis.md
-      - Social Network Analysis: Analysis_of_concerns/Social_network_analysis.md
-  - Visualization of Concerns: 
-      - Visualisation of Dashborad: Visualisation_of_concerns/dashboard.md
+# nav:
+#   - Home: index.md
+#   - Data Collection:
+#       - Twitter Data Collection: Data_collection/twitter-data-collection.md
+#       - YouTube Data Collection: Data_collection/youtube_data_collection.md
+#   - Data Preparation: 
+#       - Data Preparation: Data_preparation/data_preparation.md
+#   - Extraction of Social Concerns: 
+#       - Extraction of Topics: Extraction_of_social_concerns/Topic_modeling.md
+#       - Themes by Document Similarity: Extraction_of_social_concerns/Themes_by_Document_similarity.md
+#       - Extractions of Sentiments: Extraction_of_social_concerns/Sentiment_analysis.md
+#   - Analysis of Social Concerns: 
+#       - Temporal Analysis: Analysis_of_concerns/Temporal_analysis.md
+#       - Social Network Analysis: Analysis_of_concerns/Social_network_analysis.md
+#   - Visualization of Concerns: 
+#       - Visualisation of Dashborad: Visualisation_of_concerns/dashboard.md
+
+  nav:
+    - Home: index.md
+    - Data Collection:
+        - Twitter Data Collection: Data_collection/twitter-data-collection.md
+        - YouTube Data Collection: Data_collection/youtube_data_collection.md
+    - Data Preparation: Data_preparation/data_preparation.md
+    - Extraction of Social Concerns:
+        - Topic Modeling: Extraction_of_social_concerns/Topic_modeling.md
+        - Themes by Document Similarity: Extraction_of_social_concerns/Themes_by_Document_similarity.md
+        - Sentiment Analysis: Extraction_of_social_concerns/Sentiment_analysis.md
+    - Analysis of Social Concerns:
+        - Temporal Analysis: Analysis_of_concerns/Temporal_analysis.md
+        - Social Network Analysis: Analysis_of_concerns/Social_network_analysis.md
+    - Visualization of Concerns: Visualisation_of_concerns/dashboard.md
+
 
 markdown_extensions:
   - admonition
