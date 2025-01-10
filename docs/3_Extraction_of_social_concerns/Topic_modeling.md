@@ -290,7 +290,7 @@ sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', xticklabels=model.cl
 
 The following box plot displays the distributions of key evaluation metrics (F1 Score, Recall, Balanced Accuracy, Accuracy, and Precision) for the models used in the study. These metrics were evaluated using bootstrapping with 90% resampling of the test data.
 
-![Model Evaluation Metrics](topics_eval2.png)
+![Model Evaluation Metrics](../topics_eval2.png)
 
 ### Explanation:
 - The plot shows the spread of values for each metric across all bootstrap samples. The boxes represent the interquartile range (IQR), and the lines within the boxes indicate the median.
