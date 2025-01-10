@@ -1,7 +1,4 @@
-Got it! Here is the revised markdown with the sample output displaying all columns, including the ones created during the data cleaning process:
-
-```markdown
-# Data Preparation: Cleaning Twitter and YouTube Data
+# **Data Preparation: Cleaning Twitter and YouTube Data**
 
 This document outlines the steps followed to clean Twitter and YouTube data and merge them for further analysis and machine learning model preparation.
 

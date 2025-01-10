@@ -1,9 +1,4 @@
-I see! Let's carefully go through the sections to ensure nothing is missing and that everything aligns properly with your project's structure. Here's a more complete version of the `README.md`, making sure all components are included:
-
----
-
-```markdown
-# Text Classification and Topic Modeling with BERT, TF-IDF, and Llama-2
+# **Text Classification and Topic Modeling with BERT, TF-IDF, and Llama-2**
 
 This project demonstrates the steps for extracting topics from a corpus, evaluating the quality of topics, and using these topics for classification using machine learning metrics. It involves text preprocessing, topic extraction, evaluation using coherence and divergence, and model training for classification using various machine learning algorithms.
 

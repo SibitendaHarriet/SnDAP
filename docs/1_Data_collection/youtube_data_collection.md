@@ -1,4 +1,4 @@
-# YouTube Data Collection
+# **YouTube Data Collection**
 
 In this section, we will describe how we collected YouTube data related to social concerns in Africa. We used the YouTube Data API and web scraping techniques to gather the necessary data for analysis.
 

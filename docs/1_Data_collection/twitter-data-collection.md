@@ -1,4 +1,4 @@
-Twitter Data Collection
+# **Twitter Data Collection**
 
 This guide explains how to collect Twitter data without requiring a Twitter Developer Account using the `snscrape` tool.
 ```markdown
