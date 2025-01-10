@@ -1,22 +1,11 @@
-Apologies for the confusion earlier. Here's the corrected version of your `.md` file with the explanations and code blocks presented together without breaking them apart.
-
----
-
-### **twitter-data-collection.md**
-
-```markdown
-# Twitter Data Collection Guide
+Twitter Data Collection
 
 This guide explains how to collect Twitter data without requiring a Twitter Developer Account using the `snscrape` tool.
-
----
-
+```markdown
 ## 1. Introduction
 
 `snscrape` is a command-line and Python library for scraping tweets. Unlike Twitter's API, it does not require developer credentials or an API key, making it accessible and easy to use for researchers.
-
----
-
+```
 ## 2. Installation
 
 Follow these steps to install `snscrape`:
@@ -28,9 +17,7 @@ Follow these steps to install `snscrape`:
 ```bash
 pip install git+https://github.com/JustAnotherArchivist/snscrape.git
 ```
-
----
-
+```
 ## 3. Usage Options
 
 `snscrape` can be used in two ways:
