@@ -28,7 +28,6 @@ Below is a sample of the data collected using the YouTube Data API:
 49	[bbc, bbc news, news]	UC16niRr50-MSBwiO3YDb3RA	BBC News	25	Have Turkey’s building designs impacted the ea...	npow8eiaP0s	177352	728	0
 ```
 
----
 
 ## 2. Code for Collecting YouTube Data by API
 
