@@ -183,7 +183,7 @@ df['Text_langue'] = df['Text_emj'].apply(detect_my)
 ```
 
 Below is the distribution of detected languages in the dataset:
-`./docs/2_Data_preparation/language_detection.png`
+![Language Detection and Translation](docs/2_Data_preparation/language_detection.png)
 
 
 ```python
