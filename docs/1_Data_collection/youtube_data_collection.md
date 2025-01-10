@@ -14,14 +14,19 @@ We collected YouTube data using two methods:
 
 Below is a sample of the data collected using the YouTube Data API:
 
-| **Tags**                 | **Channel Title**          | **Category ID** | **Video Title**                                         | **Video ID**  | **Views** | **Comments** | **Favorites** |
-|--------------------------|----------------------------|-----------------|--------------------------------------------------------|---------------|-----------|--------------|---------------|
-| The Social Problems...   | Kawalis Family             | 22              | The Social Problems in Africa Doc 1 Full Lecture       | ggJm7PmkT84  | 2,539     | 0            | 0             |
-| Heal Africa              | Heal Africa                | 24              | Social Distancing - Episode 2 | Heal Africa Films    | zpn7qUc2lgU  | 252       | 0            | 0             |
-| Social Distancing...     | SouthSide Comedy           | 23              | SOCIAL DISTANCING (Africa vs Rest Of World)            | TvK70nr8FTw  | 1,213     | 1            | 0             |
-| Social Studies Songs...  | PRIMARY REVISION KENYA...  | 27              | SOCIAL STUDIES SONGS FOR AFRICA: E. WAWERU 2020       | oQ_4cJ9_gy8  | 1,387,173 | 1,082        | 0             |
-| South Africa, In...      | Best Documentary           | 24              | South Africa, In Search of Social Justice             | U4u6S-_gSlA  | 5,995     | 29           | 0             |
-
+```tags	channelId	channelTitle	categoryId	title	videoId	viewCount	commentCount	favoriteCount
+0	[The Social Problems in Africa Doc 1 Full Lect...	UC_STwA23RnVrj5bYe4OniIw	Kawalis Family	22	The Social Problems in Africa Doc 1 Full Lectu...	ggJm7PmkT84	2539	0	0
+1	[]	UCjinQ1Dr8-MZHVDwwf_77Yw	SouthSide Comedy	23	SOCIAL DISTANCING (Africa vs Rest Of World) | ...	TvK70nr8FTw	1213	1	0
+2	[Heal Africa]	UCycy9CyXHUD8d91FFJh90ng	Heal Africa	24	Social Distancing - Episode 2 | Heal Africa Films	zpn7qUc2lgU	252	0	0
+3	[LATEST, TRENDING, PERFORMANCE, MATIANGI]	UC9T922hvCFns0DydovQOdzg	PRIMARY REVISION KENYA OFFICIAL	27	SOCIAL STUDIES SONGS FOR AFRICA: E. WAWERU 2020	oQ_4cJ9_gy8	1387173	1082	0
+4	[documentary, documentaries, doco, south afric...	UCmOCpBKeoBPp-HwarhIBA2g	Best Documentary	24	South Africa, In Search of Social Justice	U4u6S-_gSlA	5995	29	0
+...	...	...	...	...	...	...	...	...	...
+45	[]	UCHSOqo1eYLPaoY82fMs7_Rw	National Geographic Africa	22	South Africa and 30x30: Social, economic and e...	VPmelOJAhZo	258	0	0
+46	[Africa, Africa 7th class Social studies, Afri...	UCWZURcr-Ci3WkccppIADWzQ	GVS Academy	27	Africa 7th Class Social studies | Africa lesso...	3Vtvw6pQA34	18420	55	0
+47	[Zozi Tunzi, zozibini tunzi, zozibini tunzi mi...	UCgK0ISOrgUkitGvKo4c9Wfg	DStv	24	Zozibini Tunzi Nominated for African Social St...	YxiJK_LfDeA	530	2	0
+48	[IMF, international monetary fund, Education, ...	UCIYhr3JsLYfKkCM7-W5B6DA	IMF	25	Social Spending for Inclusive Growth in the Mi...	T-EWT83aOAo	599	4	0
+49	[bbc, bbc news, news]	UC16niRr50-MSBwiO3YDb3RA	BBC News	25	Have Turkey’s building designs impacted the ea...	npow8eiaP0s	177352	728	0
+```
 
 ---
 
