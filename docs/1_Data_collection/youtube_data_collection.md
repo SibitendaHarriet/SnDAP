@@ -1,27 +1,16 @@
 # **YouTube Data Collection**
-
-In this section, we will describe how we collected YouTube data related to social concerns in Africa. We used the YouTube Data API and web scraping techniques to gather the necessary data for analysis.
+In this section, we describe how we collected YouTube data related to social concerns in Africa. The process involved using the YouTube Data API for structured data collection and Selenium for web scraping to extract additional details.
 
 ## 1. Introduction
+We collected YouTube data using two main methods:
 
-We collected YouTube data using two methods: 
-- **YouTube Data API**: To fetch video statistics, tags, and category details.
-- **Web Scraping (Selenium)**: To extract additional information such as video descriptions, titles, and links.
-
----
-
+YouTube Data API: To fetch metadata such as video statistics, tags, and categories.
+Web Scraping (Selenium): To gather video descriptions, titles, and links not available via the API.
+2.
 ## 2. Summary of Collected Data
 
 Below is a sample of the data collected using the YouTube Data API:
-
-```tags	channelId	channelTitle	categoryId	title	videoId	viewCount	commentCount	favoriteCount
-0	[The Social Problems in Africa Doc 1 Full Lect...	UC_STwA23RnVrj5bYe4OniIw	Kawalis Family	22	The Social Problems in Africa Doc 1 Full Lectu...	ggJm7PmkT84	2539	0	0
-1	[]	UCjinQ1Dr8-MZHVDwwf_77Yw	SouthSide Comedy	23	SOCIAL DISTANCING (Africa vs Rest Of World) | ...	TvK70nr8FTw	1213	1	0
-2	[Heal Africa]	UCycy9CyXHUD8d91FFJh90ng	Heal Africa	24	Social Distancing - Episode 2 | Heal Africa Films	zpn7qUc2lgU	252	0	0
-3	[LATEST, TRENDING, PERFORMANCE, MATIANGI]	UC9T922hvCFns0DydovQOdzg	PRIMARY REVISION KENYA OFFICIAL	27	SOCIAL STUDIES SONGS FOR AFRICA: E. WAWERU 2020	oQ_4cJ9_gy8	1387173	1082	0
-
-```
-
+![Summary of Collected Data](../youtube_data.png)
 
 ## 2. Code for Collecting YouTube Data by API
 

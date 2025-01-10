@@ -1,7 +1,7 @@
 # **Twitter Data Collection**
 
 This guide explains how to collect Twitter data without requiring a Twitter Developer Account using the `snscrape` tool.
-```markdown
+
 ## 1. Introduction
 
 `snscrape` is a command-line and Python library for scraping tweets. Unlike Twitter's API, it does not require developer credentials or an API key, making it accessible and easy to use for researchers.
