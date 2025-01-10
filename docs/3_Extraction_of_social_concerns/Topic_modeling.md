@@ -283,7 +283,10 @@ sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', xticklabels=model.cl
 ```
 ## 14. **Model Evaluation Results**
 
-The following box plot displays the distributions of key evaluation metrics (F1 Score, Recall, Balanced Accuracy, Accuracy, and Precision) for the models used in the study. These metrics were evaluated using bootstrapping with 90% resampling of the test data.
+The following plot displays the comparison of accuracy. Ensemble models by voting or stacking improve individual performance. 
+
+![Model Evaluation Metrics](../topics_eval.png)
+The following plot displays the distributions of key evaluation metrics (F1 Score, Recall, Balanced Accuracy, Accuracy, and Precision) for the models used in the study. These metrics were evaluated using bootstrapping with 90% resampling of the test data.
 
 ![Model Evaluation Metrics](../topics_eval2.png)
 
@@ -466,6 +469,8 @@ docs_per_topic
 
 ### Outcome:
 - The dataset `docs_per_topic` now includes a new column, `llama2_labelswsp`, which contains the descriptive labels generated for each topic.
+
+![Outcome:](../topics_res1.png)
 - These labels help in understanding the thematic content of each topic based on the most important words.
 
 ### Step 3: Saving the Labeled Dataset
