@@ -8,7 +8,24 @@ We collected YouTube data using two methods:
 - **YouTube Data API**: To fetch video statistics, tags, and category details.
 - **Web Scraping (Selenium)**: To extract additional information such as video descriptions, titles, and links.
 
-## 2. Code for Collecting YouTube Data
+---
+
+## 2. Summary of Collected Data
+
+Below is a sample of the data collected using the YouTube Data API:
+
+| **Tags**                 | **Channel Title**          | **Category ID** | **Video Title**                                         | **Video ID**  | **Views** | **Comments** | **Favorites** |
+|--------------------------|----------------------------|-----------------|--------------------------------------------------------|---------------|-----------|--------------|---------------|
+| The Social Problems...   | Kawalis Family             | 22              | The Social Problems in Africa Doc 1 Full Lecture       | ggJm7PmkT84  | 2,539     | 0            | 0             |
+| Heal Africa              | Heal Africa                | 24              | Social Distancing - Episode 2 | Heal Africa Films    | zpn7qUc2lgU  | 252       | 0            | 0             |
+| Social Distancing...     | SouthSide Comedy           | 23              | SOCIAL DISTANCING (Africa vs Rest Of World)            | TvK70nr8FTw  | 1,213     | 1            | 0             |
+| Social Studies Songs...  | PRIMARY REVISION KENYA...  | 27              | SOCIAL STUDIES SONGS FOR AFRICA: E. WAWERU 2020       | oQ_4cJ9_gy8  | 1,387,173 | 1,082        | 0             |
+| South Africa, In...      | Best Documentary           | 24              | South Africa, In Search of Social Justice             | U4u6S-_gSlA  | 5,995     | 29           | 0             |
+
+
+---
+
+## 2. Code for Collecting YouTube Data by API
 
 We used the `youtube_search` function defined in the `youtube_data.py` file to search for videos related to social concerns. The function collects data such as video title, view count, comment count, etc. Here's the code used for this process:
 
