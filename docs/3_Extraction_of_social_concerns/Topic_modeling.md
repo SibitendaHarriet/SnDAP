@@ -290,15 +290,12 @@ sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', xticklabels=model.cl
 
 The following box plot displays the distributions of key evaluation metrics (F1 Score, Recall, Balanced Accuracy, Accuracy, and Precision) for the models used in the study. These metrics were evaluated using bootstrapping with 90% resampling of the test data.
 
-![Model Evaluation Metrics](docs/3_Extraction_of_social_concerns/topic_eval2.png)
+![Model Evaluation Metrics](C:\Users\hsibitenda\SnDAP\docs\3_Extraction_of_social_concerns\topics_eval2.png)
 
 ### Explanation:
 - The plot shows the spread of values for each metric across all bootstrap samples. The boxes represent the interquartile range (IQR), and the lines within the boxes indicate the median.
 - Each metric provides insights into the model's overall performance, robustness, and stability across various subsets of the test data.
 
-Sure! Let's break the explanation and the code into smaller, more digestible sections for better readability in the `README.md`. Here's a revised version:
-
----
 
 ## 16. **Topic Merging for Smaller Clusters**
 
@@ -315,7 +312,7 @@ The merging process involves the following steps:
 
 ### Step 1: Extracting Top Words for Each Topic
 
-Before merging, we extract the top words for each topic to better understand the clusters. This is done using the TF-IDF matrix.
+For merging, we extract the top words for each topic to better understand the clusters. This is done using the TF-IDF matrix.
 
 ```python
 def extract_top_n_words_per_topic(tf_idf, count, docs_per_topic, n=10):
@@ -403,7 +400,7 @@ topic_sizes = extract_topic_sizes(df)
 top_n_words
 ```
 
-This gives us an updated list of topic sizes and the most relevant words for each remaining topic after the merging process.
+<!-- This gives us an updated list of topic sizes and the most relevant words for each remaining topic after the merging process.
 ```Number of topics: 295
 Number of topics: 286
 Number of topics: 277
@@ -411,144 +408,8 @@ Number of topics: 268
 Number of topics: 260
 Number of topics: 252
 Number of topics: 244
-Number of topics: 236
-Number of topics: 228
-Number of topics: 220
-Number of topics: 212
-Number of topics: 203
-Number of topics: 194
-Number of topics: 185
-Number of topics: 176
-Number of topics: 168
-Number of topics: 160
-Number of topics: 152
-Number of topics: 146
-Number of topics: 140
-Number of topics: 135
-Number of topics: 130
-Number of topics: 125
-Number of topics: 120
-Number of topics: 115
-Number of topics: 110
-Number of topics: 105
-Number of topics: 99
-Number of topics: 93
-Number of topics: 87
-Number of topics: 81
-Number of topics: 75
-Number of topics: 69
-Number of topics: 63
-Number of topics: 56
-Number of topics: 50
-Number of topics: 46
-Number of topics: 41
-Number of topics: 38
-Number of topics: 34
-Number of topics: 29
-Number of topics: 22
-Number of topics: 16
-Number of topics: 10
-{0: [('covid', 0.004264753010553059),
-  ('african', 0.004132396355870341),
-  ('time', 0.004105565743630238),
-  ('video', 0.004008177708356928),
-  ('nigeria', 0.003935928529495938),
-  ('visa', 0.003928455561424404),
-  ('medium', 0.0039184777286674615),
-  ('passport', 0.003855947504467974),
-  ('state', 0.0038488254771742152),
-  ('driver', 0.003823655697035549)],
- 1: [('frontline', 0.13126725145605064),
-  ('pb', 0.08563254354865356),
-  ('documentaryconfusion', 0.07623193885681112),
-  ('reactionsm', 0.07484238945339566),
-  ('spiritualist', 0.07330123792427921),
-  ('traveling', 0.06590773702997366),
-  ('solved', 0.06149399396263008),
-  ('official', 0.05315088473705128),
-  ('infertility', 0.05224802639715868),
-  ('spirit', 0.051712925028530234)],
- 2: [('pitbull', 0.28214703242386613),
-  ('washington', 0.19640066856094782),
-  ('schumer', 0.159469559757918),
-  ('oncamera', 0.15547237511813597),
-  ('pelosi', 0.15287422840258238),
-  ('shouting', 0.13958144630617214),
-  ('post', 0.13751731412005624),
-  ('alicia', 0.12267262279298526),
-  ('habia', 0.11941674493706982),
-  ('comptes', 0.11941674493706982)],
- 3: [('challenge', 0.045760477078369714),
-  ('innovation', 0.035843378360062135),
-  ('energy', 0.032124930487526626),
-  ('amp', 0.0298607417080666),
-  ('entrepreneurship', 0.02909284263683155),
-  ('entrepreneur', 0.0290588393789799),
-  ('news', 0.025892079063791474),
-  ('changemakers', 0.02381122173620606),
-  ('enterprise', 0.02318702828461175),
-  ('environmental', 0.022176112420584773)],
- 4: [('nicki', 0.1313074865784844),
-  ('minaj', 0.130360473543224),
-  ('reactionsm', 0.08021857057654457),
-  ('pb', 0.07531065658346635),
-  ('dw', 0.07264490837091944),
-  ('davos', 0.06825955765731091),
-  ('bidens', 0.06377396799442915),
-  ('newshour', 0.06295116956554998),
-  ('daily', 0.06213950185155512),
-  ('documentary', 0.05971346477607126)],
- 5: [('china', 0.2180207519568891),
-  ('pres', 0.10270270016996909),
-  ('prosperity', 0.10189100058262364),
-  ('risen', 0.07334896355640846),
-  ('viewsas', 0.07059410566438593),
-  ('influence', 0.06951862874860472),
-  ('newshour', 0.059066152564348384),
-  ('reactionsm', 0.05495751419785642),
-  ('strength', 0.05437755379928426),
-  ('bodycam', 0.053730502021585566)],
- 6: [('robot', 0.2826774669665731),
-  ('harvard', 0.2086959261618073),
-  ('sophia', 0.20253853217117962),
-  ('taliban', 0.1627665888005557),
-  ('defeated', 0.1605311361132715),
-  ('economist', 0.1406040948363385),
-  ('jimmy', 0.12902433923169496),
-  ('afghanistan', 0.1254973947949475),
-  ('mba', 0.11191351072638743),
-  ('tonight', 0.10902225322929028)],
- 7: [('reactionsm', 0.04674616431531839),
-  ('godsent', 0.043196801553882655),
-  ('anxiety', 0.035926254238226124),
-  ('solving', 0.026900681561688497),
-  ('reactionsk', 0.02670099046274069),
-  ('videoconfusion', 0.022326713315304916),
-  ('foundation', 0.021619451469468386),
-  ('official', 0.0198612975445199),
-  ('live', 0.01901903468199964),
-  ('paypal', 0.01870978154037444)],
- 8: [('tillerson', 0.1345493816360408),
-  ('trump', 0.102991574487498),
-  ('balvin', 0.08400743878572767),
-  ('nbc', 0.0507868658590287),
-  ('tillersons', 0.04331911246158699),
-  ('tragediestrademark', 0.041454508908193306),
-  ('milltrademarks', 0.041454508908193306),
-  ('meek', 0.04059320216433257),
-  ('faceface', 0.035759277854559436),
-  ('safari', 0.03361833374845251)],
- 9: [('charm', 0.31959076767138783),
-  ('thetop', 0.20501754996526378),
-  ('naaba', 0.20360085215317164),
-  ('consult', 0.20222986233021242),
-  ('luck', 0.19243329868692446),
-  ('infertility', 0.15691312704050528),
-  ('spiritual', 0.15691312704050528),
-  ('lord', 0.1566815351932402),
-  ('gold', 0.15414141548997842),
-  ('humanity', 0.14781900912239482)]}
-  ```
+
+  ``` -->
 ### Outcome of Topic Merging
 
 By applying this merging process, we reduce the number of topics and make the clustering results more interpretable. The final topics are broader and less redundant, providing a clearer understanding of the main themes in the data.
@@ -619,9 +480,5 @@ Finally, we save the DataFrame with the topic labels to a new CSV file, so you c
 ```python
 # Save the DataFrame to a new CSV file
 docs_per_topic.to_csv('labeled_topics.csv', index=False)
-```
 
-By using this approach, each topic will have a descriptive label that makes the clustering results more interpretable. 
-
----
 
