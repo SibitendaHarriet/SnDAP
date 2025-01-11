@@ -1,7 +1,4 @@
-Here’s the `.md` content file for your theme extraction pipeline based on topics:
-
-```markdown
-# Theme Extraction Based on Topics
+# **Theme Extraction Based on Topics**
 
 This document outlines the process of extracting themes and labels from a dataset of documents using machine learning techniques, natural language processing (NLP), and language models.
 
@@ -81,7 +78,7 @@ tf_idf, count = c_tf_idf(df['Text_lemma'].values, len(df))
 ```
 
 ## Labeling with Large Language Models
-Using LLaMA:
+Using Llama:
 ```python
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 
@@ -151,7 +148,7 @@ df['cleaned_theme'] = df['theme'].apply(clean_theme)
 
 ### Unique Themes and Distribution
 - **Initial Unique Themes:** Counted from the `initial_label` column.
-- **LLaMA2 Labels Unique Themes:** Counted from the `llama2_labelone` column.
+- **Llama2 Labels Unique Themes:** Counted from the `llama2_labelone` column.
 - **Cleaned Themes:** Display the unique themes after applying the cleaning function.
 
 ```python
@@ -216,7 +213,7 @@ Bar charts visualize the distribution of topics within the top 3 themes.
 
 **Purpose:** Show the balance between precision and recall, especially useful for imbalanced datasets.
 
-### **15. Coherence Scores for Topics**
+### **Coherence Scores for Topics**
 #### Code Snippet:
 ```python
 from gensim.models.coherencemodel import CoherenceModel
@@ -253,17 +250,17 @@ The goal is to extract and classify themes from a dataset of text documents usin
 
 ### Process Overview
 
-#### 1. **Data Loading**
+#### **Data Loading**
 The input dataset (`testdataset_with_predictionstheme.csv`) was loaded and inspected:
 ```python
 new_df = pd.read_csv('/home/hsibitenda/scratch/harriet/llms/testdataset_with_predictionstheme.csv')
 ```
 
-#### 2. **Tokenization and Embeddings**
+#### **Tokenization and Embeddings**
 - Text documents were tokenized using `AutoTokenizer` and transformed into embeddings using `SentenceTransformer` with the `BAAI/bge-small-en` model.
 - Embeddings were precomputed for faster similarity comparisons.
 
-#### 3. **Theme Extraction from Sentence**
+#### **Theme Extraction from Sentence**
 A custom classification pipeline was built using the `Llama 2` model to classify text into predefined themes:
 1. **Categories**: *employment*, *poverty*, *hunger*, *education*, *security*, and *health*.
 2. **Prompt-Based Evaluation**: A natural language prompt guides the classification:
@@ -339,13 +336,12 @@ def extract_categories_probabilities(response_text):
     filtered_categories_probabilities = {cat: prob for cat, prob in categories_probabilities.items() if cat.lower() in categories}
     return filtered_categories_probabilities
 ```
-#### 5. Bar Plot Visualization
+#### Bar Plot Visualization
 To analyze the distribution of extracted themes:
 - A bar graph was created showing the count of key themes (*employment*, *poverty*, *hunger*, *education*, *security*, *health*).
 - Percentages of occurrences for each theme were annotated above bars.
-![Bar Plot Visualization](../themes_res4.png)
-![Bar Plot Visualization](../themes_res3.png)
 
+![Bar Plot Visualization](../themes_res3.png)
 
 
 # Multi-Label Classification using Machine Learning Models
@@ -353,7 +349,7 @@ To analyze the distribution of extracted themes:
 This documentation provides an overview of the multi-label classification process using various machine learning models, from data preprocessing to model training, evaluation, and visualization of results.
 
 
-## 1. Import Necessary Libraries
+## Import Necessary Libraries
 
 ```python
 import pandas as pd
@@ -383,7 +379,7 @@ from sentence_transformers import SentenceTransformer
 
 ---
 
-## 2. Data Preparation and Preprocessing
+## Data Preparation and Preprocessing
 
 ### Embedding Text Data
 We use the `SentenceTransformer` to generate text embeddings from the input text column `Text_translate2`.
@@ -405,7 +401,7 @@ x = preprocessing.scale(X_embedded)
 
 ### Target Variable Transformation
 We split and preprocess the target variable, converting the multi-label categories into lists.
-
+![Bar Plot Visualization](../themes_res4.png)
 ```python
 df['Predicted_Categories3'] = df['Predicted_Categories3'].apply(lambda x: x.split('|'))
 y = df['Predicted_Categories3']
@@ -420,7 +416,7 @@ x_train, x_test, y_train, y_test = train_test_split(
 
 ---
 
-## 3. Multi-Label Binarization
+## Multi-Label Binarization
 Convert the target labels into binary format using `MultiLabelBinarizer`.
 
 ```python
@@ -431,7 +427,7 @@ y_test_binary = mlb.transform(y_test)
 
 ---
 
-## 4. Training Machine Learning Models
+## Training Machine Learning Models
 
 We train several machine learning models for multi-label classification:
 
@@ -480,7 +476,7 @@ model_voting.fit(x_train, y_train_binary)
 
 ---
 
-## 5. Model Evaluation
+## Model Evaluation
 
 ### Individual Model Performance
 We evaluate the accuracy of each model on the test set.
@@ -519,7 +515,7 @@ plt.show()
 
 ---
 
-## 6. Visualizing Metrics
+## Visualizing Metrics
 
 ### Classification Report Metrics
 ```python
@@ -539,7 +535,7 @@ plt.show()
 
 ---
 
-## 7. Saving the Model
+## Saving the Model
 
 Save the trained Voting Classifier for future use.
 
