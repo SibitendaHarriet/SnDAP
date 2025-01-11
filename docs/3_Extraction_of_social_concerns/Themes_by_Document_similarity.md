@@ -1,4 +1,4 @@
-# **Theme Extraction Based on Topics**
+# 1. **Theme Extraction Based on Topics**
 
 This document outlines the process of extracting themes and labels from a dataset of documents using machine learning techniques, natural language processing (NLP), and language models.
 
@@ -236,13 +236,7 @@ coherence_cv_score = coherence_model_cv.get_coherence()
 **Purpose:** Compute coherence scores for the topics using different coherence methods (e.g., `c_v`, `npmi`, `u_mass`) to assess the quality of the topics generated in the model.
 
 ---
-# **Theme extraction by Document similarity**
-Here’s the content `.md` file summarizing the process and methodology for **Theme Extraction by Document Similarity**. This is structured to describe the objective, process, and results clearly for six sample themes: *employment*, *poverty*, *hunger*, *education*, *security*, and *health*.
-
----
-
-## Theme Extraction by Document Similarity
-
+# 2. **Theme extraction by Document similarity**
 ### Objective
 The goal is to extract and classify themes from a dataset of text documents using **document similarity techniques** and **machine learning models**. Six key themes—**employment**, **poverty**, **hunger**, **education**, **security**, and **health**—are identified as relevant for sustainable development goals. The approach includes leveraging advanced language models (e.g., Llama 2) and embedding techniques to ensure accurate classification.
 
@@ -260,7 +254,7 @@ new_df = pd.read_csv('/home/hsibitenda/scratch/harriet/llms/testdataset_with_pre
 - Text documents were tokenized using `AutoTokenizer` and transformed into embeddings using `SentenceTransformer` with the `BAAI/bge-small-en` model.
 - Embeddings were precomputed for faster similarity comparisons.
 
-#### **Theme Extraction from Sentence**
+#### 2. **Theme Extraction from Sentence**
 A custom classification pipeline was built using the `Llama 2` model to classify text into predefined themes:
 1. **Categories**: *employment*, *poverty*, *hunger*, *education*, *security*, and *health*.
 2. **Prompt-Based Evaluation**: A natural language prompt guides the classification:
