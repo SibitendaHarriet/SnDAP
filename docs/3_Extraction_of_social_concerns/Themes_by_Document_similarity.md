@@ -338,7 +338,7 @@ To analyze the distribution of extracted themes:
 ![Bar Plot Visualization](../themes_res3.png)
 
 
-# Multi-Label Classification using Machine Learning Models
+## Multi-Label Classification using Machine Learning Models
 
 This documentation provides an overview of the multi-label classification process using various machine learning models, from data preprocessing to model training, evaluation, and visualization of results.
 
