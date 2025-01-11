@@ -21,6 +21,7 @@ This documentation covers the following areas:
 - [YouTube Data Collection](1_Data_collection/youtube_data_collection.md)
 - [Data Preparation](2_Data_preparation/data_preparation.md)
 - [Topic Modeling](3_Extraction_of_social_concerns/Topic_modeling.md)
+- [Theme Extraction](3_Extraction_of_social_concerns/Themes_by_Document_similarity.md)
 - [Sentiment Analysis](3_Extraction_of_social_concerns/Sentiment_analysis.md)
 - [Temporal Analysis](4_Analysis_of_concerns/Temporal_analysis.md)
 - [Social Network Analysis](4_Analysis_of_concerns/Social_network_analysis.md)
