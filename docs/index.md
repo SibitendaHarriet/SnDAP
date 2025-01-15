@@ -23,6 +23,7 @@ This documentation covers the following areas:
 - [Topic Modeling](3_Extraction_of_social_concerns/Topic_modeling.md)
 - [Theme Extraction](3_Extraction_of_social_concerns/Themes_by_Document_similarity.md)
 - [Sentiment Analysis](3_Extraction_of_social_concerns/Sentiment_analysis.md)
+- [Human Evaluations](3_Extraction_of_social_concerns/Human_evaluations.md)
 - [Temporal Analysis](4_Analysis_of_concerns/Temporal_analysis.md)
 - [Social Network Analysis](4_Analysis_of_concerns/Social_network_analysis.md)
 - [Dashboard Visualization](5_Visualisation_of_concerns/dashboard.md)
