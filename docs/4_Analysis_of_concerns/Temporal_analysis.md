@@ -1,11 +1,5 @@
-Here’s a revised structure for the Markdown file, organized into two sections: **Observing Trends** and **Forecasting Trends**:
-
-```markdown
 # Trend Analysis Using Time Series Data
-
-This document explains the process of performing trend analysis on time series data using Python libraries such as Pandas, spaCy, and Statsmodels.
-
----
+This document explains the process of performing trend analysis on time series data using Python libraries such as Pandas, spaCy, and Statsmodels. For Temporal analysis, we do two tasks, Observing trends and time series prediction for future trends.
 
 ## 1. Observing Trends
 
@@ -94,6 +88,37 @@ plt.show()
 ```
 ![Visualization Example](../trends_topics1.png)
 
+### Post Frequency Analysis: Top Ten Topics
+
+This script aggregates and visualizes post data for the top ten topics across different timeframes: daily, weekly, monthly, and yearly.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Convert 'Date' column to datetime
+df['Date'] = pd.to_datetime(df['Date'])
+
+# Aggregate data for daily, weekly, monthly, and yearly
+aggr_df_daily = df.groupby(['llama2_labelone', pd.Grouper(key='Date', freq='D')])['Text_lemma'].count().reset_index()
+aggr_df_weekly = df.groupby(['llama2_labelone', pd.Grouper(key='Date', freq='W-MON')])['Text_lemma'].count().reset_index()
+aggr_df_monthly = df.groupby(['llama2_labelone', pd.Grouper(key='Date', freq='M')])['Text_lemma'].count().reset_index()
+aggr_df_yearly = df.groupby(['llama2_labelone', pd.Grouper(key='Date', freq='Y')])['Text_lemma'].count().reset_index()
+
+# Get the top ten topics
+total_posts = aggr_df_weekly.groupby('llama2_labelone')['Posts'].sum().reset_index()
+top_ten_labels = total_posts[(total_posts['Posts'] >= 100) & (total_posts['Posts'] <= 150)]['llama2_labelone']
+
+# Filter data for the top ten topics
+aggr_df_top_ten = {freq: df[df['llama2_labelone'].isin(top_ten_labels)] for freq, df in 
+                   [('daily', aggr_df_daily), ('weekly', aggr_df_weekly), ('monthly', aggr_df_monthly), ('yearly', aggr_df_yearly)]}
+
+```
+
+The output consists of four line plots visualizing the post frequency for the top ten topics.
+![Post Frequency Analysis: Top Ten Topics](../trends_topics2.png)
+
+
 ## Observing Sentiment Trends Over Time
 
 This guide visualizes trends in sentiment (positive, neutral, negative) across daily, weekly, monthly, and yearly frequencies, helping us understand how sentiment evolves over time.
@@ -142,7 +167,7 @@ This analysis tracks trends of social issues (e.g., hunger, poverty, education) 
 **Visualization**:
    - Plot trends for each frequency in a 2x2 grid of subplots.
 
-![Observing Trends of Themes](../trends_sent2.png)
+![Observing Trends of Themes](../trends_theme.png)
 
 
 
@@ -198,27 +223,10 @@ for i, sentiment in enumerate(unique_sentiments):
     
     # Set title for each subplot
     ax.set_title(f'{sentiment.capitalize()} Sentiment')
-
-# Global x and y labels
-fig.text(0.5, 0.04, 'Year', ha='center', fontsize=12)
-fig.text(0.0004, 0.5, 'Number of Posts', va='center', rotation='vertical', fontsize=12)
-
-# Remove individual y-axis labels
-for ax in axes:
-    ax.set_ylabel('')  # Remove individual y-axis labels
-fig.suptitle('Trends of Topics by Sentiment', fontsize=14)
-
-# Use the stored handles and labels to create one global legend
-fig.legend(handles, labels, loc='lower center', bbox_to_anchor=(0.5, -0.4), ncol=2, fontsize=12)
-
-# Adjust layout
-plt.tight_layout(rect=[0, 0.05, 1, 1])  # Leave space for the legend at the bottom
-
-# Show the plot
-plt.show()
 ```
 This visualization helps in identifying trends for specific topics across different sentiment categories over time.
 ![Observing Topics and Sentiments](../trends_topics2.png)
+
 ---
 ## Observing Trends of Themes by Sentiment
 
@@ -493,8 +501,6 @@ plt.show()
 print(df)
 
 ``` 
-![Performance Evaluation and Model Selection](../trends_eval.png)
-
 ### 1.2 Filter Data for Specific Themes
 
 To focus on the "poverty" theme, we filter rows where the `Predicted_Categories3` column contains the keyword "poverty." Additionally, we identify the top topics within this theme and filter for those with counts between 28 and 40 for better clarity.
@@ -583,17 +589,7 @@ for i, sentiment in enumerate(unique_sentiments):
     ax.set_xlabel('Date')
     if i == 0:
         ax.set_ylabel('Number of Posts')
-
-# Add a global legend for all topics
-handles, labels = ax.get_legend_handles_labels()
-fig.legend(handles, labels, loc='lower center', bbox_to_anchor=(0.5, -0.2), ncol=2, fontsize=10)
-
-# Adjust layout and display the plot
-fig.suptitle('Predicted Trends of Topics Related to Poverty by Sentiment', fontsize=14)
-plt.tight_layout(rect=[0, 0.1, 1, 1])
-plt.show()
 ```
-
 ---
 
 ## Step 3: Results and Observations
