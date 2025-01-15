@@ -377,19 +377,7 @@ Here’s a clean and structured Markdown file summarizing your theme analysis fo
 # Theme Analysis of Human-Labeled Data
 
 This document details the evaluation of themes labeled by humans and their alignment with predicted categories using various agreement metrics. Bootstrapping was used to assess metric variability and provide robust performance estimates.
-
----
-
-Here's the updated markdown content incorporating the changes for selecting themes and computing evaluations based on participant inputs. This version outlines the preprocessing, sampling, and final label computation before evaluations are performed.
-
----
-
-```markdown
-# Theme Analysis of Human Labels
-
-## Introduction
-
-This document outlines a methodical approach to analyzing themes provided by participants, including preprocessing steps, participant sampling, and the computation of agreement metrics and evaluations. Themes are extracted, validated, and aggregated across participants to derive a final, consolidated label for each topic.
+Themes are extracted, validated, and aggregated across participants to derive a final, consolidated label for each topic.
 
 ---
 
@@ -663,5 +651,5 @@ all_metrics_df = pd.concat(all_metrics, ignore_index=True)
 all_metrics_melted = all_metrics_df.melt(id_vars='Theme', var_name='Metric', value_name='Value')
 ```
 ![Visualize Results](../theme_eval2.png)
-- The bootstrapped metrics for each theme are shown in a bar plot, and the mean values of each metric are printed for further analysis.
+- The bootstrapped metrics for each theme are shown in a bar plot, and the values of each metric are based on existance each label in the mulitilabel column.
   
