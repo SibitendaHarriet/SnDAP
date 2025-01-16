@@ -1,7 +1,7 @@
 # Trend Analysis Using Time Series Data
 This document explains the process of performing trend analysis on time series data using Python libraries such as Pandas, spaCy, and Statsmodels. For Temporal analysis, we do two tasks, Observing trends and time series prediction for future trends.
 
-## 1. Observing Trends
+# 1. Observing Trends
 
 This section focuses on extracting and visualizing trends from time series data.
 
@@ -225,7 +225,7 @@ for i, sentiment in enumerate(unique_sentiments):
     ax.set_title(f'{sentiment.capitalize()} Sentiment')
 ```
 This visualization helps in identifying trends for specific topics across different sentiment categories over time.
-![Observing Topics and Sentiments](../trends_topics2.png)
+![Observing Topics and Sentiments](../trends_topics2_2.png)
 
 ---
 ## Observing Trends of Themes by Sentiment
@@ -245,9 +245,9 @@ This visualization helps in identifying trends for specific topics across differ
        ['theme', pd.Grouper(key='Date', freq='Y'), 'llama3_sentiment']
    )['Text_lemma'].count().reset_index()
 ```
-![Observing Trends of Themes by Sentiment](../trends_topics4.png)
+![Observing Trends of Themes by Sentiment](../trends_themes1.png)
 
-## 2. Forecasting Trends
+# 2. Forecasting Trends
 
 In this section, we prepare the data for forecasting by ensuring stationarity and applying time series models.
 
@@ -266,7 +266,7 @@ print(dfoutput)
 If the **p-value** is very low (typically < 0.05), the data is considered stationary and suitable for forecasting.For our study we selected columns for topics and themes for forecasting afterming this criteria.
 
 
-# Forecasting Trends and Best Model Selection
+## Forecasting Trends and Best Model Selection
 
 This compares several forecasting models (Auto-ARIMA, Prophet, LSTM, DeepAR, Transformer) to predict trends related to various social issues, including sentiment analysis on themes like hunger, poverty, and education. After evaluating different models based on multiple metrics (MAE, MSE, RMSE, MAPE, R²), we selected **Prophet** as the best model.
 
