@@ -385,3 +385,301 @@ top_topics = filtered_data['llama2_labelone'].value_counts().head(10).index
 # Plot
 ```
 ![Top topics and Organisations Entities](../entities3.png)
+
+
+# Social Network Analysis Based on Entities (Persons, Organisations, Locations)
+
+This document provides an overview of a Social Network Analysis (SNA) pipeline that processes and analyzes entities of persons, organisations, and locations based on various network attributes, including community detection, influence, and link analysis. The analysis is performed using data stored in a DataFrame (`df_expanded`) and utilizes various techniques such as Graph Convolutional Networks (GCNs), Louvain community detection, UMAP for dimensionality reduction, and node classification based on clustering and centrality metrics.
+
+The following steps outline the implementation of the network analysis pipeline:
+
+## 1. Data Preprocessing
+
+We begin by filtering the dataset into three categories: persons, organisations, and locations.
+
+```python
+# Filter rows where 'people' is in the list within the 'category' column
+df_people = df_expanded[df_expanded['category'].apply(lambda x: 'persons' in x)]
+df_org = df_expanded[df_expanded['category'].apply(lambda x: 'organisations' in x)]
+df_country = df_expanded[df_expanded['category'].apply(lambda x: 'locations' in x)]
+
+# Check the shape of the resulting dataframe
+df_people.shape
+df_org.shape
+df_country.shape
+```
+
+## 2. Graph Construction
+
+The next step involves creating a directed graph (`DiGraph`) from the data. Nodes represent entities such as topics, sentiments, themes, categories, and the actual entities (persons, organisations, locations), while edges are formed based on relationships (e.g., `Relations` column).
+
+```python
+import ast
+import networkx as nx
+
+# Create a directed graph from the data
+G = nx.DiGraph()
+
+# Add nodes and edges to the graph
+for _, row in df_subset.iterrows():
+    topic = row['topic']
+    sentiment = row['sentiment']
+    relations = ast.literal_eval(row['Relations'])
+    category = row['category']
+    theme = row['theme']
+    entities = [row['Head'], row['Tail']]
+    time = row['Date']
+
+    # Add nodes with type and time attributes
+    G.add_node(topic, type='Topic', time=time)
+    G.add_node(sentiment, type='Sentiment', time=time)
+    G.add_node(theme, type='Theme', time=time)
+    G.add_node(category, type='Category', time=time)
+
+    for entity in entities:
+        G.add_node(entity, type='Entity', time=time)
+
+    # Add edges from Relations
+    for relation in relations:
+        head = relation['head']
+        relation_type = relation['type']
+        tail = relation['tail']
+        G.add_edge(head, tail, type=relation_type, time=time)
+        G.add_edge(head, sentiment, type='Sentiment', time=time)
+        G.add_edge(head, theme, type='Theme', time=time)
+        G.add_edge(head, category, type='Category', time=time)
+        G.add_edge(head, topic, type='Topic', time=time)
+
+        G.add_edge(tail, sentiment, type='Sentiment', time=time)
+        G.add_edge(tail, theme, type='Theme', time=time)
+        G.add_edge(tail, category, type='Category', time=time)
+        G.add_edge(tail, topic, type='Topic', time=time)
+
+# Convert to undirected graph for community detection
+G_undirected = G.to_undirected()
+```
+
+## 3. Community Detection
+
+Community detection helps to uncover groups of nodes with strong interconnections. We apply the Louvain method, which is effective in detecting communities in large networks.
+
+### 3.1 Louvain Modularity (Community Detection)
+
+- **Objective:** Detect communities within the network using the Louvain method, based on the modularity optimization.
+- **Method:** The Louvain algorithm maximizes the modularity score by iteratively moving nodes between communities to increase the density of intra-community edges.
+- **Result:** The output will show the communities identified by the Louvain method, along with the modularity score, which indicates how well the community structure fits the graph.
+
+```python
+import community as community_louvain
+import matplotlib.pyplot as plt
+
+# Detect communities using Louvain method
+node_community = community_louvain.best_partition(G_undirected)
+
+# Assign the community as an attribute to each node
+for node, community in node_community.items():
+    G_undirected.nodes[node]['community'] = community
+
+# Visualize the graph with nodes colored by community
+plt.figure(figsize=(10, 7))
+pos = nx.spring_layout(G_undirected, seed=42)
+node_colors = [node_community.get(node, -1) for node in G_undirected.nodes]
+
+# Draw the graph
+nodes = nx.draw_networkx_nodes(G_undirected, pos, node_color=node_colors, cmap='viridis', node_size=300, alpha=0.8)
+nx.draw_networkx_edges(G_undirected, pos, edge_color='gray', alpha=0.5)
+nx.draw_networkx_labels(G_undirected, pos, font_size=8, font_color='black')
+
+# Add a color bar to represent communities
+plt.colorbar(nodes, label='Community')
+plt.title("Network Graph with Communities")
+plt.axis("off")
+plt.show()
+```
+![3.1 Louvain Modularity (Community Detection)](../network_1.png)
+---
+
+## 4. Clustering Coefficient
+
+- **Objective:** Measure how nodes are clustered together within communities, providing insights into the cohesiveness of these communities.
+- **Method:** The clustering coefficient for each node will be calculated. This is done by looking at the proportion of a node’s neighbors that are also connected to each other.
+- **Result:** The higher the clustering coefficient, the more tightly knit the community is. This can help in identifying strong communities where members are highly interdependent.
+
+```python
+# Compute the clustering coefficient for each node
+clustering_coeffs = nx.clustering(G_undirected)
+
+# Visualize the clustering coefficient distribution
+plt.hist(list(clustering_coeffs.values()), bins=30, color='skyblue', edgecolor='black')
+plt.title("Clustering Coefficients Distribution")
+plt.xlabel("Clustering Coefficient")
+plt.ylabel("Frequency")
+plt.show()
+```
+
+---
+
+## 5. Degree Centrality
+
+- **Objective:** Identify the most central and influential nodes within each community.
+- **Method:** Degree centrality is calculated by simply counting the number of edges connected to each node. A higher degree centrality indicates a node is more central and influential in its community.
+- **Result:** We will rank the nodes in each community by their degree centrality and identify influential nodes or "hubs."
+
+```python
+# Compute the degree centrality for each node
+degree_centrality = nx.degree_centrality(G_undirected)
+
+# Assign degree centrality as an attribute to each node
+for node, degree in degree_centrality.items():
+    G_undirected.nodes[node]['degree_centrality'] = degree
+
+# Visualize degree centrality for nodes
+plt.hist(list(degree_centrality.values()), bins=30, color='lightgreen', edgecolor='black')
+plt.title("Degree Centrality Distribution")
+plt.xlabel("Degree Centrality")
+plt.ylabel("Frequency")
+plt.show()
+
+# Save the graph with community information
+nx.write_gexf(G_undirected, "community_graph_people.gexf")
+```
+
+## 6. Influence Analysis Based on Centrality Measures
+
+In this section, we analyze the influence of nodes in the network using various centrality measures. These measures help identify key players or nodes that are important for information flow, communication, and network efficiency. We will explore **Betweenness Centrality**, **Closeness Centrality**, and **Eigenvector Centrality**.
+
+### 6.1 Betweenness Centrality
+
+- **Objective:** Betweenness centrality measures the number of times a node lies on the shortest path between two other nodes. It helps identify nodes that act as bridges or intermediaries in the network, which can control the flow of information.
+- **Relevance:** Nodes with high betweenness centrality have the ability to influence the flow of information or resources between different communities or parts of the network.
+  
+```python
+# Compute the betweenness centrality for each node
+betweenness_centrality = nx.betweenness_centrality(G_undirected)
+
+# Assign betweenness centrality as an attribute to each node
+for node, betweenness in betweenness_centrality.items():
+    G_undirected.nodes[node]['betweenness_centrality'] = betweenness
+
+# Visualize betweenness centrality for nodes
+plt.hist(list(betweenness_centrality.values()), bins=30, color='coral', edgecolor='black')
+plt.title("Betweenness Centrality Distribution")
+plt.xlabel("Betweenness Centrality")
+plt.ylabel("Frequency")
+plt.show()
+```
+![6.1 Betweenness Centrality](../network_2.png)
+### 6.2 Closeness Centrality
+
+- **Objective:** Closeness centrality measures how close a node is to all other nodes in the network, based on the shortest paths. It helps identify nodes that can spread information quickly across the network.
+- **Relevance:** Nodes with high closeness centrality are important for rapid communication and information diffusion, as they can reach other nodes with fewer hops.
+
+```python
+# Compute the closeness centrality for each node
+closeness_centrality = nx.closeness_centrality(G_undirected)
+
+# Assign closeness centrality as an attribute to each node
+for node, closeness in closeness_centrality.items():
+    G_undirected.nodes[node]['closeness_centrality'] = closeness
+
+# Visualize closeness centrality for nodes
+plt.hist(list(closeness_centrality.values()), bins=30, color='lightblue', edgecolor='black')
+plt.title("Closeness Centrality Distribution")
+plt.xlabel("Closeness Centrality")
+plt.ylabel("Frequency")
+plt.show()
+```
+
+### 6.3 Eigenvector Centrality
+
+- **Objective:** Eigenvector centrality measures a node’s influence based on the influence of its neighbors. A node is considered influential if it is connected to other influential nodes, not just a high number of nodes.
+- **Relevance:** This centrality measure helps identify nodes that are not only well-connected but also connected to other well-connected or influential nodes. It is useful for understanding the broader impact and power of nodes in the network.
+
+```python
+# Compute the eigenvector centrality for each node
+eigenvector_centrality = nx.eigenvector_centrality(G_undirected, max_iter=1000)
+
+# Assign eigenvector centrality as an attribute to each node
+for node, eigenvector in eigenvector_centrality.items():
+    G_undirected.nodes[node]['eigenvector_centrality'] = eigenvector
+
+# Visualize eigenvector centrality for nodes
+plt.hist(list(eigenvector_centrality.values()), bins=30, color='lightgreen', edgecolor='black')
+plt.title("Eigenvector Centrality Distribution")
+plt.xlabel("Eigenvector Centrality")
+plt.ylabel("Frequency")
+plt.show()
+```
+
+
+### Link Analysis: PageRank and Density-Based Methods
+
+In this section, we extend our link analysis to provide insights into the structure of the graph using two distinct methods: **PageRank** and **Density-Based Analysis**. These methods help in identifying influential nodes and understanding local neighborhood connectivity, respectively.
+
+#### PageRank Analysis
+
+PageRank is a widely used algorithm that assigns a numerical weight to each node in the graph, indicating its relative importance within the network. Higher PageRank scores suggest nodes that are central or influential.
+
+**PageRank Calculation**  
+   Using the NetworkX implementation, we calculate the PageRank scores for each node in the undirected graph:
+   Nodes are visualized with sizes proportional to their PageRank scores. A `spring_layout` algorithm is used for positioning, and node colors represent their importance:
+
+   ```python
+   plt.figure(figsize=(10, 6))
+   pos = nx.spring_layout(G_undirected, seed=42)
+   node_sizes = [5000 * pagerank_scores[node] for node in G_undirected.nodes()]
+   nodes = nx.draw_networkx_nodes(
+       G_undirected, pos,
+       node_size=node_sizes,
+       node_color=list(pagerank_scores.values()),
+       cmap='viridis', alpha=0.8
+   )
+   
+   ```
+
+ #### Density-Based Analysis
+
+Density analysis measures the density of each node's local neighborhood to understand its connectivity relative to its neighbors.
+
+1. **Neighborhood Density Calculation**  
+   The density of a node's neighborhood is computed as the ratio of edges present to the maximum possible edges within its subgraph (including the node itself):
+
+   ```python
+   density_scores = {}
+   for node in G_undirected.nodes:
+       neighbors = list(G_undirected.neighbors(node))
+       subgraph = G_undirected.subgraph(neighbors + [node])  # Include the node itself
+       density_scores[node] = nx.density(subgraph)
+   ```
+
+   These scores are added to the graph as node attributes:
+
+   ```python
+   nx.set_node_attributes(G_undirected, density_scores, "density")
+   ```
+
+2. **Visualization by Density**  
+   Nodes are visualized with sizes proportional to their density scores, providing insights into localized clustering:
+
+   ```python
+   plt.figure(figsize=(10, 6))
+   pos = nx.spring_layout(G_undirected, seed=42)
+   node_sizes = [5000 * density_scores[node] for node in G_undirected.nodes()]
+   nodes = nx.draw_networkx_nodes(
+       G_undirected, pos,
+       node_size=node_sizes,
+       node_color=list(density_scores.values()),
+       cmap='viridis', alpha=0.8
+   )
+   ```
+![Density-Based Analysis](../network_3.png)
+
+### Conclusion for Social Network Analysis
+
+We analyzed networks of **people**, **countries**, and **organizations**, focusing on key aspects:  
+
+- **Community Detection**: Using metrics like **modularity** and **clustering coefficients** and **degree centrality**.  
+- **Influence Analysis**: Employing **closeness**, **betweenness**, and **eigenvector centrality**.  
+- **Link Analysis**: Examining **density**and **pagerank**  
+
+All networks were stored and uploaded to **Gephi** for deeper exploration, providing insights into influence, community structures, and relationship dynamics.
