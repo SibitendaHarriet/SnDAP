@@ -50,10 +50,7 @@ st.header("Social Network Data Analysis and Prediction App")
 page = st.sidebar.selectbox("Choose a page", ["Topics", "Themes", "Sentiment", "Social Network Analysis"])
 ```
 
-Here's an updated **README.md** file that focuses specifically on **Topic Extraction and Analysis** aspects:
-
-```markdown
-# Topic Extraction and Analysis in Social Network Data
+## Topic Extraction and Analysis in Social Network Data
 
 This section of the project focuses on extracting and analyzing topics from social network data. It leverages **Natural Language Processing (NLP)** techniques, machine learning models, and interactive visualizations to identify key themes and topics from large text datasets.
 
