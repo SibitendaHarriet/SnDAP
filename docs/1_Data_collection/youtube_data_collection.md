@@ -67,46 +67,113 @@ df.to_csv('concerns20202020.csv', sep=',', index=False)
 
 We used Selenium WebDriver to scrape video details such as title and description for each video. The following code demonstrates how we used Selenium to extract this information:
 
-```python
-from selenium import webdriver 
-import pandas as pd 
-from selenium.webdriver.common.by import By 
-from selenium.webdriver.chrome.options import Options
+This guide explains how the provided Python script collects data from YouTube using Selenium and BeautifulSoup.
 
-driver_path = "chromedriver101.exe"
-option = Options()
-option.add_argument("--disable-infobars")
-option.add_argument("start-maximized")
-option.add_argument("--disable-extensions")
+## Prerequisites
+1. Install Python (preferably version 3.7 or higher).
+2. Install the following Python libraries:
+   - `selenium`
+   - `pandas`
+   - `beautifulsoup4`
+   - `xlsxwriter`
+3. Download the appropriate version of the ChromeDriver executable for your Chrome browser version.
+4. Place the ChromeDriver executable in your working directory or update the path in the script.
 
-driver = webdriver.Chrome(executable_path=driver_path, options=option)
+---
 
-for i in range(1, 2): # Iterate through pages
-    driver.get("https://www.youtube.com/results?search_query=social+concerns%2C+Africa%2C+2018")
+## Step-by-Step Process
 
-    user_data = driver.find_elements(By.XPATH, '//*[@id="video-title"]')
-    links = []
-    for i in user_data:
-        links.append(i.get_attribute('href'))
+### 1. **Set Up the WebDriver**
+- Import necessary libraries, including Selenium's `webdriver`, BeautifulSoup, and pandas.
+- Configure ChromeDriver with options to disable unnecessary browser features:
+  ```python
+  driver_path = "chromedriver101.exe"
+  option = Options()
+  option.add_argument("--disable-infobars")
+  option.add_argument("start-maximized")
+  option.add_argument("--disable-extensions")
+  driver = webdriver.Chrome(executable_path=driver_path, options=option)
+  ```
 
-    print(len(links))
+### 2. **Access YouTube Search Results**
+- Use the WebDriver to open YouTube's search results page for a specific query:
+  ```python
+  driver.get("https://www.youtube.com/results?search_query=social+questions%2C+Africa%2C+2022")
+  ```
 
-    df = pd.DataFrame(columns=['link', 'title', 'description', 'category'])
+### 3. **Extract Video Links**
+- Identify video elements on the page using XPath:
+  ```python
+  user_data = driver.find_elements(By.XPATH, '//*[@id="video-title"]')
+  ```
+- Collect links from the video elements:
+  ```python
+  links = [i.get_attribute('href') for i in user_data]
+  ```
 
-    for x in links:
-        driver.get(x)
-        v_id = x.strip('https://www.youtube.com/watch?v=')
-        v_title = driver.find_element(By.CSS_SELECTOR, "h3#video-title").text
-        v_description = driver.find_element(By.CSS_SELECTOR, "span#description-text").text
-        df.loc[len(df)] = [v_id, v_title, v_description, 'concerns']
+### 4. **Scroll and Load Additional Results**
+- Implement a loop to scroll the page and dynamically load more results:
+  ```python
+  for timer in range(0, 1000):
+      driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+      sleep(3)
+  ```
 
-df.to_excel("youconcerns120182.xlsx")
-```
+### 5. **Parse Video Information**
+- Use BeautifulSoup to parse the page source and locate relevant video metadata:
+  ```python
+  soup = BeautifulSoup(driver.page_source, "html.parser")
+  all_posts = soup.find_all("ytd-video-renderer", {"class": "style-scope ytd-item-section-renderer"})
+  ```
 
-### Saving the Scraped Data
+### 6. **Extract Metadata for Each Video**
+- For each video post, extract details such as:
+  - Title
+  - Link
+  - Description
+  - Username
+  - Time posted
+  - Reactions
+- Example for extracting the title:
+  ```python
+  try:
+      title = post.find("a", {"class": "yt-simple-endpoint style-scope ytd-video-renderer"}).get('aria-label')
+  except:
+      title = "not found"
+  ```
 
-Finally, we save the scraped data into a CSV file:
+### 7. **Store Data in Lists**
+- Append extracted data to corresponding lists for each attribute (e.g., `title_list`, `links_list`, etc.):
+  ```python
+  title_list.append(title)
+  links_list.append(links)
+  ```
 
-```python
-df.to_csv("youtube_concerns.csv", encoding='utf-8', index=False)
-```
+### 8. **Save Data to Excel**
+- Convert the collected data into a pandas DataFrame:
+  ```python
+  df = pd.DataFrame({
+      "time": time_list,
+      "links_ID": links_list,
+      "username": username_list,
+      "title": title_list,
+      "desc1": desc1_list,
+      "desc2": desc2_list,
+      "reactions": reactions_list
+  })
+  ```
+- Remove duplicates to avoid redundant entries:
+  ```python
+  df.drop_duplicates(subset="title", keep="first", inplace=True)
+  ```
+- Save the DataFrame to an Excel file:
+  ```python
+  df.to_excel("youquestions.xlsx")
+  ```
+
+### 9. **Terminate the Process**
+- Break the loop once a sufficient amount of data (e.g., 1000 rows) is collected:
+  ```python
+  if df.shape[0] > 1000:
+      break
+  ```

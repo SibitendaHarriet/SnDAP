@@ -10,6 +10,8 @@ This project implements an interactive web application for social network data a
    - Predict sentiments from social comments.
    - Visualize sentiment distribution with Plotly charts.
 3. **Temporal Analysis**
+   - Observing trends.
+   - Forecasting trends by time series prediction 
 4. **Social Network Analysis**  
    - Generate and analyze networks of people, countries, and organizations.
    - Detect communities, analyze network influence, and detect links using graph theory metrics.
@@ -47,7 +49,7 @@ import streamlit as st
 st.header("Social Network Data Analysis and Prediction App")
 
 # Sidebar Navigation
-page = st.sidebar.selectbox("Choose a page", ["Topics", "Themes", "Sentiment", "Social Network Analysis"])
+page = st.sidebar.selectbox("Choose a page", ["Topics", "Themes", "Sentiment", "Temporal Analysis", "Social Network Analysis"])
 ```
 
 ## Topic Extraction and Analysis in Social Network Data
@@ -302,7 +304,7 @@ if uploaded_file is not None:
     csv = test_df.to_csv(index=False).encode('utf-8')
     st.download_button("Download Predicted Themes as CSV", csv, "predicted_themes.csv", "text/csv")
 ```
-![File Upload for Predictions on Test Dataset](../vis_themes1_2.png)
+![File Upload for Predictions on Test Dataset](../vis_themes2.png)
 ---
 
 #### e. **Predicted Themes Count Distribution**:

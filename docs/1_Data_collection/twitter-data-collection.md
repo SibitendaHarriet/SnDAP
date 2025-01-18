@@ -87,6 +87,7 @@ df = pd.DataFrame(tweets, columns=["ID", "Date", "Content"])
 # Save the DataFrame to a CSV file
 df.to_csv("tweets.csv", index=False)
 ```
+![4. Saving Data to a CSV File](../data_twitter.png)
 
 **Explanation of the Code**:
 1. `pd.DataFrame`: Converts the collected tweets into a tabular format with columns for tweet ID, date, and content.
